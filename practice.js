@@ -112,3 +112,41 @@
 // function compare(a,b){
 // 	return b-a;
 // }
+
+// 3.路径规划
+// 每次移动方向可以用“L, R, U, D, LU, LD, RU, RD”之一表达，
+// 分别表示向“左、右、上、下、左上、左下、右上、右下”移动一步。 
+// var line1;
+// while(line1=read_line()){
+// 	line1=line1.split("");
+// 	var sAlp=parseInt(line1[0],16);
+// 	var sNum=line1[1];
+// 	var line2=read_line().split("");
+// 	var aAlp=parseInt(line2[0],16);
+// 	var aNum=line2[1];
+// 	var res=[];
+// 	while(sAlp!=aAlp || sNum!=aNum){
+// 		var step="";
+// 		if(sAlp>aAlp){
+// 			step+="L";
+// 			sAlp--;
+// 		}else if(sAlp<aAlp){
+// 			step+="R"
+// 			sAlp++;
+// 		}
+
+// 		if(sNum>aNum){
+// 			step+="D";
+// 			sNum--;
+// 		}else if(sNum<aNum){
+// 			step+="U";
+// 			sNum++;
+// 		}
+
+// 		res.push(step);
+// 	}
+// 	print(res.length);
+// 	for (var i = 0; i < res.length; i++) {
+// 		print(res[i]);
+// 	}
+// }
