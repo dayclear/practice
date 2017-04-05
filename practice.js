@@ -150,3 +150,54 @@
 // 		print(res[i]);
 // 	}
 // }
+
+// 4.备考
+// 输入中有多组测试数据。每组测试数据的第一行包含两个整数d和
+// sumTime，1<=d<=30, 0<=sumTime<=240，分别表示小东复习的天数
+// 以及每天用于复习的时间之和。紧随其后的d行中，每行包含两个
+// 空格分隔的整数，为小东父亲要求小东在这一天用于复习时间的
+// 范围iminTime和imaxTime，0<=iminTime<=imaxTime<=8。
+
+var line1;
+while(line1=read_line()){
+	line1=line1.split(" ");
+	var d=line1[0];
+	var sumTime=+line1[1];
+	var times=[];
+	var sumMin=0;
+	var sumMax=0;
+	for (var i = 0; i < d; i++) {
+		var line=read_line().split(" ");
+		var min=+line[0];
+		var max=+line[1];
+      	var diff=max-min;
+		times.push({
+			"min":min,
+			"max":max,
+			"diff":diff
+		});
+		sumMin+=min;
+		sumMax+=max;
+	}
+	var result=[];
+	if(sumMin<=sumTime && sumMax>=sumTime){
+		var sur=sumTime-sumMin;
+		print("Yes")
+		for (var i = 0; i < times.length; i++) {
+			if(sur!=0){
+				if(sur>=times[i].diff){
+					result.push(times[i].max);
+					sur-=times[i].diff;
+				}else{
+					result.push(times[i].min+sur)
+					sur=0;
+				}
+			}else{
+				result.push(times[i].min);
+			}
+		}
+		print(result.join(" "))
+	}else{
+		print("No");
+	}
+}
