@@ -158,46 +158,137 @@
 // 空格分隔的整数，为小东父亲要求小东在这一天用于复习时间的
 // 范围iminTime和imaxTime，0<=iminTime<=imaxTime<=8。
 
+// var line1;
+// while(line1=read_line()){
+// 	line1=line1.split(" ");
+// 	var d=line1[0];
+// 	var sumTime=+line1[1];
+// 	var times=[];
+// 	var sumMin=0;
+// 	var sumMax=0;
+// 	for (var i = 0; i < d; i++) {
+// 		var line=read_line().split(" ");
+// 		var min=+line[0];
+// 		var max=+line[1];
+//       	var diff=max-min;
+// 		times.push({
+// 			"min":min,
+// 			"max":max,
+// 			"diff":diff
+// 		});
+// 		sumMin+=min;
+// 		sumMax+=max;
+// 	}
+// 	var result=[];
+// 	if(sumMin<=sumTime && sumMax>=sumTime){
+// 		var sur=sumTime-sumMin;
+// 		print("Yes")
+// 		for (var i = 0; i < times.length; i++) {
+// 			if(sur!=0){
+// 				if(sur>=times[i].diff){
+// 					result.push(times[i].max);
+// 					sur-=times[i].diff;
+// 				}else{
+// 					result.push(times[i].min+sur)
+// 					sur=0;
+// 				}
+// 			}else{
+// 				result.push(times[i].min);
+// 			}
+// 		}
+// 		print(result.join(" "))
+// 	}else{
+// 		print("No");
+// 	}
+// }
+
+// 4.棋
+// 游戏在一个3X3的棋盘上进行，每个棋盘格单元处于空白、画叉或
+// 画圈状态中的一种，你的任务是确定下一轮由谁下棋:
+// 1：轮到先手下棋；
+// 2：轮到后手下棋；
+// 或者是判定游戏的状态：
+// x：给定的棋局不是合法的棋局；
+// 1 won：先手获胜；
+// 2 won：后手获胜；
+// Draw：平局；
+// 输入中有多组测试数据。每组测试数据包含三行，每行均由字母“.”、
+// “X”、“0”构成，“.”代表空白、“X”代表画叉、“0”代表画圈。
+// 对每组测试数据，在单独的一行中输出六种评判结果之一：
+// 1, 2, x, 1 won, 2 won, draw。 
+
 var line1;
+var os=0,xs=0,dots=0;
 while(line1=read_line()){
-	line1=line1.split(" ");
-	var d=line1[0];
-	var sumTime=+line1[1];
-	var times=[];
-	var sumMin=0;
-	var sumMax=0;
-	for (var i = 0; i < d; i++) {
-		var line=read_line().split(" ");
-		var min=+line[0];
-		var max=+line[1];
-      	var diff=max-min;
-		times.push({
-			"min":min,
-			"max":max,
-			"diff":diff
-		});
-		sumMin+=min;
-		sumMax+=max;
+	os=0;xs=0;dots=0;
+	var chess=[];
+	line1=line1.split("");
+	for (var i = 0; i < line1.length; i++) {
+		chess[0]=[];
+		chess[0].push(line1[i]);
+		judge(line1[i]);
 	}
-	var result=[];
-	if(sumMin<=sumTime && sumMax>=sumTime){
-		var sur=sumTime-sumMin;
-		print("Yes")
-		for (var i = 0; i < times.length; i++) {
-			if(sur!=0){
-				if(sur>=times[i].diff){
-					result.push(times[i].max);
-					sur-=times[i].diff;
-				}else{
-					result.push(times[i].min+sur)
-					sur=0;
-				}
-			}else{
-				result.push(times[i].min);
-			}
-		}
-		print(result.join(" "))
+	var line2=read_line().split("");
+	for (var i = 0; i < line2.length; i++) {
+		chess[1]=[];
+		chess[1].push(line2[i]);
+		judge(line2[i]);
+	}
+	var line3=read_line().split("");
+	for (var i = 0; i < line3.length; i++) {
+		chess[2]=[];
+		chess[2].push(line3[i]);
+		judge(line3[i]);
+	}
+	var won1=false;
+	var won2=false;
+	if(os-xs>1 || os-xs<-1){
+		print("x");
 	}else{
-		print("No");
+		won1=judge2(chess,"X");
+		won2=judge2(chess,"0");
+		if(won1==true && won2==true){
+			print("x");
+		}else if(won1==true){
+			print("1 won");
+		}else if(won2==true){
+			print("2 won");
+		}else{
+			
+		}
 	}
+}
+
+function judge(ele){
+	if(ele=="0"){
+		os++;
+	}else if(ele=="X"){
+		xs++;
+	}else{
+		dots++;
+	}
+}
+
+function judge2(chess,ele){
+	var res=fasle;
+	for (var i = 0; i < chess.length; i++) {
+		if ((chess[i][0] == chess[i][1] &&
+				chess[i][1] == chess[i][2] &&
+				chess[2][i] == ele) ||
+			(chess[1][i] == chess[2][i] &&
+				chess[2][i] == chess[0][i] &&
+				chess[2][i] == ele)) {
+			res = true;
+		}
+	}
+	if ((chess[0][0] == chess[1][1] &&
+			chess[1][1] == chess[2][2] &&
+			chess[2][2] == ele) ||
+		(chess[0][2] == chess[1][1] &&
+			chess[2][0] == chess[1][1] &&
+			chess[2][0] == ele)) {
+		res = true;
+	}
+
+	return res;
 }
