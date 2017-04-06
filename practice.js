@@ -222,39 +222,47 @@ var os=0,xs=0,dots=0;
 while(line1=read_line()){
 	os=0;xs=0;dots=0;
 	var chess=[];
+	chess[0]=[];
+	chess[1]=[];
+	chess[2]=[];
 	line1=line1.split("");
-	for (var i = 0; i < line1.length; i++) {
-		chess[0]=[];
+	for (var i = 0; i < line1.length; i++) {	
 		chess[0].push(line1[i]);
 		judge(line1[i]);
 	}
 	var line2=read_line().split("");
 	for (var i = 0; i < line2.length; i++) {
-		chess[1]=[];
 		chess[1].push(line2[i]);
 		judge(line2[i]);
 	}
 	var line3=read_line().split("");
 	for (var i = 0; i < line3.length; i++) {
-		chess[2]=[];
 		chess[2].push(line3[i]);
 		judge(line3[i]);
 	}
 	var won1=false;
 	var won2=false;
-	if(os-xs>1 || os-xs<-1){
+	if(os-xs>0 || os-xs<-1){
 		print("x");
 	}else{
 		won1=judge2(chess,"X");
 		won2=judge2(chess,"0");
 		if(won1==true && won2==true){
 			print("x");
-		}else if(won1==true){
+		}else if(won1==true && xs-os==1){
 			print("1 won");
-		}else if(won2==true){
+		}else if(won1==true && xs-os==0){
+			print("x");
+		}else if(won2==true && xs-os==0){
 			print("2 won");
+		}else if(won2==true && xs-os==1){
+			print("x");
+		}else if(os+xs==9){
+			print("draw");
+		}else if(os==xs){
+			print("1");
 		}else{
-			
+			print("2");
 		}
 	}
 }
@@ -270,25 +278,25 @@ function judge(ele){
 }
 
 function judge2(chess,ele){
-	var res=fasle;
-	for (var i = 0; i < chess.length; i++) {
+	var b=false;
+	
+	for (var i = 0; i < 3; i++) {
 		if ((chess[i][0] == chess[i][1] &&
 				chess[i][1] == chess[i][2] &&
-				chess[2][i] == ele) ||
-			(chess[1][i] == chess[2][i] &&
+				chess[i][2] == ele)||
+				(chess[1][i] == chess[2][i] &&
 				chess[2][i] == chess[0][i] &&
-				chess[2][i] == ele)) {
-			res = true;
+				chess[2][i] == ele)){
+			b=true;
 		}
 	}
-	if ((chess[0][0] == chess[1][1] &&
+	if((chess[0][0] == chess[1][1] &&
 			chess[1][1] == chess[2][2] &&
 			chess[2][2] == ele) ||
-		(chess[0][2] == chess[1][1] &&
+			(chess[0][2] == chess[1][1] &&
 			chess[2][0] == chess[1][1] &&
-			chess[2][0] == ele)) {
-		res = true;
+			chess[2][0] == ele)){
+		b=true;
 	}
-
-	return res;
+	return b;
 }
