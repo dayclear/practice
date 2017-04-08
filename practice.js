@@ -301,53 +301,173 @@
 // 	return b;
 // }
 
+// 5.addition
+// var arr=[];
+// var num=0;
+// var n=6;
+// function search(start,arrIndex,time){
+// 	if(time<n){
+// 		for (var i = start; i <=n; i++){
+// 			arr[arrIndex]=i;
+// 			if(judge(arr)){
+// 				cons(arr);
+// 				break;
+// 			}
+// 			search(i,arrIndex+1,time+1)
+// 		}
+// 	}
+// }
+// search(0,0,0);
+// console.log(num+"种");
+// // for (var i1 = 0; i1 <= n; i1++) {
+// // 	arr[0]=i1;
+// // 	if(judge(arr)){
+// // 		cons(arr);
+// // 		break;
+// // 	}
+// // 	for (var i2 = i1; i2 <=n; i2++) {
+// // 		arr[1]=i2;
+// // 		if(judge(arr)){
+// // 			cons(arr);
+// // 			break;
+// // 		}
+// // 		for (var i3 = i2; i3 <=n; i3++) {
+// // 			arr[2]=i3;
+// // 			if(judge(arr)){
+// // 				cons(arr);
+// // 				break;
+// // 			}
+// // 			for (var i4 = i3; i4 <=n; i4++){
+// // 				arr[3]=i4;
+// // 				if(judge(arr)){
+// // 					cons(arr);
+// // 					break;
+// // 				}
+// // 				for (var i5 = i4; i5 <=n; i5++){
+// // 					arr[4]=i5;
+// // 					if(judge(arr)){
+// // 						cons(arr);
+// // 						break;
+// // 					}
+// // 				}
+// // 			}
+// // 		}
+// // 	}
+// // }
+// function judge(arr){
+// 	if(sum(arr,arr.length)==n){
+// 		return true;
+// 	}else{
+// 		return false;
+// 	}
+// }
+
+// function cons(arr){
+// 	var log=""
+// 	if(!isEqual(arr)){
+// 		for (var i = 0; i < arr.length-1; i++) {
+// 			if(arr[i]!=0){
+// 				log+=""+arr[i]+"+";
+// 			}
+// 		}
+// 		num++;
+// 		log+=""+arr[arr.length-1];
+// 		console.log(log);
+// 	}
+// }
+
+// function isEqual(arr){
+// 	var b=[];
+// 	for (var i = 0; i < arr.length; i++) {
+// 		if(arr[i]!=0){
+// 			b.push(arr[i]);
+// 		}
+// 	}
+// 	var temp=b[0];
+// 	var res=true;
+// 	for (var i = 1; i < b.length; i++) {
+// 		if(temp!=b[i] && b[i]){
+// 			res=false;
+// 		}
+// 	}
+// 	return res;
+// }
+
+// function sum(arr,k){
+// 	var res=0;
+// 	for (var i = 0; i < k; i++) {
+// 		res+=arr[i];
+// 	}
+// 	return res;
+// }
+
 //排列
-function permutate(array, permutatedArray) {
-	if (!permutatedArray) {
-		permutatedArray = [];
-	}
-	if (array.length > 1) {
-		var elementCur = array.shift();
-		permutate(array, permutatedArray);
-		var permutatedArrayLen = permutatedArray.length;
-		for (var j = 0; j < permutatedArrayLen; j++) {
-			var p = permutatedArray.shift();
-			for (var i = 0; i <= p.length; i++) {
-				var r = p.slice(0);
-				r.splice(i, 0, elementCur);
-				permutatedArray.push(r)
-			}
-		}
-	} else {
-		permutatedArray.push([array[0]]);
-	}
-	return permutatedArray;
-}
+// function permutate(array, permutatedArray) {
+// 	if (!permutatedArray) {
+// 		permutatedArray = [];
+// 	}
+// 	if (array.length > 1) {
+// 		var elementCur = array.shift();
+// 		permutate(array, permutatedArray);
+// 		var permutatedArrayLen = permutatedArray.length;
+// 		for (var j = 0; j < permutatedArrayLen; j++) {
+// 			var p = permutatedArray.shift();
+// 			for (var i = 0; i <= p.length; i++) {
+// 				var r = p.slice(0);
+// 				r.splice(i, 0, elementCur);
+// 				permutatedArray.push(r)
+// 			}
+// 		}
+// 	} else {
+// 		permutatedArray.push([array[0]]);
+// 	}
+// 	return permutatedArray;
+// }
 
-//组合
-function choose(arr, size) {
-	var allResult = [];
-	(function(arr, size, result) {
-		var arrLen = arr.length;
-		if (size > arrLen) {
-			return;
-		}
-		if (size == arrLen) {
-			allResult.push([].concat(result, arr))
-		} else {
-			for (var i = 0; i < arrLen; i++) {
-				var newResult = [].concat(result);
-				newResult.push(arr[i]);
+// //组合
+// function choose(arr, size) {
+// 	var allResult = [];
+// 	(function(arr, size, result) {
+// 		var arrLen = arr.length;
+// 		if (size > arrLen) {
+// 			return;
+// 		}
+// 		if (size == arrLen) {
+// 			allResult.push([].concat(result, arr))
+// 		} else {
+// 			for (var i = 0; i < arrLen; i++) {
+// 				var newResult = [].concat(result);
+// 				newResult.push(arr[i]);
 
-				if (size == 1) {
-					allResult.push(newResult);
-				} else {
-					var newArr = [].concat(arr);
-					newArr.splice(0, i + 1);
-					arguments.callee(newArr, size - 1, newResult);
-				}
-			}
-		}
-	})(arr, size, []);
-	return allResult;
-}
+// 				if (size == 1) {
+// 					allResult.push(newResult);
+// 				} else {
+// 					var newArr = [].concat(arr);
+// 					newArr.splice(0, i + 1);
+// 					arguments.callee(newArr, size - 1, newResult);
+// 				}
+// 			}
+// 		}
+// 	})(arr, size, []);
+// 	return allResult;
+// }
+
+// 克隆对象
+// function cloneObj(clone){
+// 	var newObj=null;
+// 	if(clone instanceof Object){
+// 		newObj={};
+// 		for(key in obj){
+// 			newObj[key]=cloneObj(obj[key]);
+// 		}
+// 		return newObj;
+// 	}else if(clone instanceof Array){
+// 		newObj=[];
+// 		for (var i = 0; i < clone.length; i++) {
+// 			newObj[i]=cloneObj(clone[i]);
+// 		}
+// 		return newObj;
+// 	}else{
+// 		return clone;
+// 	}
+// }
