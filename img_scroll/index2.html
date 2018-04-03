@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>单张图片滚动</title>
+    <style>
+        *{margin: 0;padding:0;list-style: none;border:none;}
+        body{background:#efefef;}
+        .content{padding:0 5px;width:360px;background:#fff;margin:50px auto;}/*主要用来美化样式*/
+        #scrollpic{position:relative;height:220px;width:360px;overflow: hidden;}
+        #prev,#next{display:block;height:30px;width:20px;background:#999;position:absolute;top:95px;z-index:10;
+        color:#333;text-align: center;vertical-align: middle;}
+        #prev:hover,#next:hover{background:#666;color:#fff;}
+        #prev{left:10px;}
+        #next{right:10px;}
+        #scrollpic ul{position:absolute;height:220px;}
+        .move{transition: left 1s linear; -webkit-transition: left 300ms linear}
+        #scrollpic ul li{float:left;padding:5px;height:210px;width:350px;  }
+        #scrollpic ul li img{display:inline-block;width:350px;height:210px;}
+    </style>
+</head>
+<body>
+<div class="content">
+    <div id="scrollpic">
+        <a href="#" id="prev"> < </a>
+        <ul class="move">
+            <li><a href="#"><img src="img/a.jpg"/></a></li>
+            <li><a href="#"><img src="img/b.jpg"/></a></li>
+            <li><a href="#"><img src="img/c.jpg"/></a></li>
+            <li><a href="#"><img src="img/3.gif"/></a></li>
+        </ul>
+        <a href="#" id="next"> > </a>
+    </div>
+</div>
+<script>
+    window.onload=function(){
+        var oPicList = document.getElementById("scrollpic");
+        var oUl = oPicList.getElementsByTagName("ul")[0];
+        var aLi = oUl.getElementsByTagName("li");
+        var aPrev = document.getElementById("prev");
+        var aNext = document.getElementById("next");
+        oUl.innerHTML+=oUl.innerHTML;
+        oUl.style.width = aLi[0].offsetWidth * aLi.length + "px";
+        var speed = -aLi[0].offsetWidth ;
+        function movePic(){
+            // oUl.className="move";
+            oUl.style.left = oUl.offsetLeft - 360 + "px";
+            if(oUl.offsetLeft <= -oUl.offsetWidth/2){
+                oUl.className = "";
+                oUl.style.left = 0 + "px";
+            }
+        }
+        var timer = setInterval(movePic,1000);
+        //鼠标操作 暂停/滚动
+        oUl.onmouseover = function(){
+            clearInterval(timer);
+        };
+        oUl.onmouseout = function(){
+            timer = setInterval(movePic,1000);
+        };
+    }
+</script>
+</body>
+</html>

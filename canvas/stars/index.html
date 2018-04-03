@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Star</title>
+    <style>
+        body{
+            width: 100%;
+            background-color: #eee;
+            padding:0;
+            margin:0;
+        }
+        .canvas{
+            width: 100%;
+            display:block;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" class="canvas"></canvas>
+</body>
+
+<script>
+    var WIDTH=screen.width;
+    var HEIGHT=300;
+    window.onload=function(){
+        var canvas=document.getElementById("canvas");
+        canvas.width=WIDTH;
+        canvas.height=HEIGHT;
+        var context=canvas.getContext("2d");
+        var skyStyle=context.createLinearGradient(0,0,0,canvas.height);
+        skyStyle.addColorStop(0.0,"#147");
+        skyStyle.addColorStop(1.0,"#eee");
+        context.fillStyle=skyStyle;
+        context.fillRect(0,0,canvas.width,canvas.height);
+        for(var i=0;i<50;i++){
+            var r=Math.random()*HEIGHT/200+HEIGHT/100;
+            var x=Math.random()*WIDTH;
+            var y=Math.random()*HEIGHT*0.5;
+            var rot=Math.random()*360;
+            drawStar(context,r, x, y, rot);
+        }
+    };
+    function drawStar(cxt,r,x,y,rot){
+        cxt.save();
+        cxt.translate(x,y);
+        cxt.rotate(rot/180*Math.PI);
+        cxt.scale(r*2,r*2);
+        star(cxt);
+        cxt.fillStyle="#fb3";
+//        cxt.strokeStyle="#fd5";
+//        cxt.lineWidth=3;
+//        cxt.lineJoin="round";
+        cxt.fill();
+//        cxt.stroke();
+        cxt.restore();
+    }
+    function star(cxt){
+        cxt.beginPath();
+        for(var i=0;i<5;i++){
+            cxt.lineTo(Math.cos((18+i*72)/180*Math.PI),
+                    -Math.sin((18+i*72)/180*Math.PI));
+            cxt.lineTo(Math.cos((54+i*72)/180*Math.PI)*0.5,
+                    -Math.sin((54+i*72)/180*Math.PI)*0.5);
+        }
+        cxt.closePath();
+    }
+</script>
+</html>
