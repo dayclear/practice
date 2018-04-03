@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, minxmum-scale=1, maximum-scale=1, initial-scale=1, user-scalable=no" />
+	<title>video</title>
+	<style>
+		html,
+		body {
+			padding: 0;
+			margin: 0;
+			overflow: hidden;s
+		}
+
+		video{
+		  width:100%;
+		  display:block;
+		}
+
+		#paly_pause{
+		  float: right;
+		}
+
+		button{
+		  line-height: 30px;
+		  font-size: 16px;
+		  padding: 0 10px;
+		  border-radius: 5px;
+		  color: #064c04;
+		  background: #f3f9ff;
+		  border: solid 1px #969696;
+		}
+	</style>
+</head>
+<body>
+	<!-- <video id="video" src="./images/rabbit.mp4" controls="false">
+		您的浏览器不支持视频
+	</video> -->
+	<video id="video" src="./images/chat.mp4">
+		您的浏览器不支持视频
+	</video>
+	<p>
+	    <button id="paly_pause">播放</button>
+	    <button id="start" class="s1">跟妹子聊天</button>
+	    <button id="step" class="s1">跳过跟妹子聊天</button>
+	    <button id="dream" class="s2">跟陌生男聊聊梦想</button>
+	    <button id="drink" class="s2">喝口饮料先</button>
+  	</p>
+
+<script>
+	window.onload = function(){
+
+		var video = $('video');
+
+		video.ontimeupdate = function() {
+		  var currentTime = video.currentTime;
+		  show(currentTime > 64 ? '.s2' : '.s1');
+		  hide(currentTime > 64 ? '.s1' : '.s2');
+		  if(
+		     (currentTime > 64 && currentTime < 65) || 
+		     (currentTime > 113 && currentTime < 114)
+		  ){
+		    video.pause();
+		  }
+		};
+
+		var ppBtn = $('paly_pause');
+		video.onplay = function(){
+		  ppBtn.innerText = '暂停';
+		};
+		video.onpause = function(){
+		  ppBtn.innerText = '播放';
+		};
+		ppBtn.onclick = function(){
+		  video[video.paused ? 'play' : 'pause' ]();
+		};
+		$('start').onclick = function(){
+		  video.currentTime = 1;
+		  video.play();
+		};
+		$('step').onclick = function(){
+		  video.currentTime = 60;
+		  video.play();
+		};
+		$('dream').onclick = function(){
+		  video.currentTime = 83;
+		  video.play();
+		};
+		$('drink').onclick = function(){
+		  video.currentTime = 116;
+		  video.play();
+		};
+
+		hide('.s2');
+		function show(sel){
+			Array.prototype.slice.call(document.querySelectorAll(sel)).forEach(function(item,index){
+		    item.style.display='inline'
+		  });
+		}
+		function hide(sel){
+		  Array.prototype.slice.call(document.querySelectorAll(sel)).forEach(function(item,index){
+		    item.style.display='none'
+		    
+		  });
+		}
+		function $(id){
+		  return document.getElementById(id);
+		}
+	}
+</script>
+</body>
+</html>

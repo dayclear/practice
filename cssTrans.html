@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>css过渡</title>
+    <style>
+        body, html, ul, li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .demo1 {
+            width: 500px;
+            height: 300px;
+            border: 2px solid #000;
+            margin: 0 auto;
+            padding-left: 20px;
+        }
+        .demo1 > li {
+            position: relative;
+            display: inline-block;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            color: green;
+            background-color: #999;
+        }
+        .demo1 > li ul {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 100px;
+            height: 0;
+            overflow: hidden;
+        }
+        .demo1 > li ul li {
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            color: #fff;
+            background-color: orange;
+            margin-top: 2px;
+            transition: all .5s;
+            opacity: 0;
+        }
+        .demo1 > li ul li:nth-of-type(even) {
+            transform: translate3d(-100%, 0, 0);
+        }
+        .demo1 > li ul li:nth-of-type(odd) {
+            transform: translate3d(100%, 0, 0);
+        }
+        .demo1 > li:hover ul {
+            overflow: visible;
+        }
+        .demo1 > li:hover ul li {
+            transform: translate3d(0, 0, 0);
+            opacity: 1;
+        }
+
+        .demo2 {
+            width: 500px;
+            height: 400px;
+            border: 2px solid #000;
+            margin: 10px auto 0;
+        }
+        .demo2 > li {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+            background: orange;
+            transition: all .5s ease-in-out;
+        }
+        .demo2 > li h4 {
+            height: 40px;
+            color: green;
+            background: linear-gradient(to bottom, #999, #ccc);
+            margin: 0;
+            z-index: 10;
+        }
+        .demo2 > li:hover {
+            height: 200px;
+        }
+        .demo2 > li ul {
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <ul class="demo1" id="demo1">
+        <li>
+            html
+            <ul>
+                <li>section</li>
+                <li>article</li>
+                <li>group</li>
+                <li>nav</li>
+            </ul>
+        </li>
+        <li>
+            css
+            <ul>
+                <li>border</li>
+                <li>padding</li>
+                <li>margin</li>
+                <li>background</li>
+            </ul>
+        </li>
+        <li>
+            js
+            <ul>
+                <li>var</li>
+                <li>let</li>
+                <li>const</li>
+                <li>new</li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="demo2">
+        <li id='li2'>
+            <h4>html</h4>
+            <ul>
+                <li>section</li>
+                <li>article</li>
+                <li>group</li>
+                <li>nav</li>
+            </ul>
+        </li>
+        <li>
+            <h4>css</h4>
+            <ul>
+                <li>border</li>
+                <li>padding</li>
+                <li>margin</li>
+                <li>background</li>
+            </ul>
+        </li>
+        <li>
+            <h4>js</h4>
+            <ul>
+                <li>var</li>
+                <li>let</li>
+                <li>const</li>
+                <li>new</li>
+            </ul>
+        </li>
+    </ul>
+<script>
+    window.onload = function() {
+        var demo1 = document.getElementById('li2');
+        demo1.addEventListener('transitionend', function() {
+            console.log('结束');
+        })
+    }
+</script>
+</body>
+</html>

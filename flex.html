@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>flex布局</title>
+	<style>
+	html, body {
+		margin: 0;
+		padding: 0;
+	}
+	body {
+		display: flex;
+	}
+		.out-box {
+			width: 100px;
+			height: 100px;
+			border-radius: 10px;
+			margin-top: 10px;
+			margin-left: 10px;
+			padding: 4px;
+			background-color: #999;
+		}
+		.box {
+			display: flex;
+			width: 90px;
+			height: 90px;
+			border-radius: 10px;
+			padding: 5px;
+			background-color: #ccc;
+		}
+		.dot {
+			width: 26px;
+			height: 26px;
+			border-radius: 50%;
+			background-color: #000;
+		}
+
+		.box1 {
+			justify-content: center;
+			align-items: center;
+		}
+	/*---------*/
+		.box2 {
+			flex-direction: column;
+			justify-content: space-around;
+			align-items: center;
+		}
+	/*--------*/
+		.box3 {
+			justify-content: space-between;
+		}
+		.dot31 {
+			align-self: flex-end;
+		}
+		.dot32 {
+			align-self: center;
+		}
+
+	/*--------*/
+		.box4 {
+			flex-wrap: wrap;
+			justify-content: space-around;
+		}
+		.inner-box4 {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+		}
+	/*--------*/
+		.box5 {
+			justify-content: space-between;
+		}
+		.inner-box51,
+		.inner-box53 {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+		.inner-box52 {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+	/*-------*/
+		.box6 {
+			flex-direction: column;
+			justify-content: space-around;
+		}
+		.inner-box6 {
+			display: flex;
+			justify-content: space-between;
+		}
+	</style>
+</head>
+<body>
+	<div class="out-box">
+		<div class="box box1">
+			<div class="dot dot1"></div>
+		</div>
+	</div>
+	<div class="out-box">
+		<div class="box box2">
+			<div class="dot dot21"></div>
+			<div class="dot dot22"></div>
+		</div>
+	</div>
+	<div class="out-box">
+		<div class="box box3">
+			<div class="dot dot31"></div>
+			<div class="dot dot32"></div>
+			<div class="dot dot33"></div>
+		</div>
+	</div>
+	<div class="out-box">
+		<div class="box box4">
+			<div class="inner-box4">
+				<div class="dot dot41"></div>
+				<div class="dot dot42"></div>
+			</div>
+			<div class="inner-box4">
+				<div class="dot dot43"></div>
+				<div class="dot dot44"></div>
+			</div>
+		</div>
+	</div>
+	<div class="out-box">
+		<div class="box box5">
+			<div class="inner-box51">
+				<div class="dot dot51"></div>
+				<div class="dot dot52"></div>
+			</div>
+			<div class="inner-box52">
+				<div class="dot dot53"></div>
+			</div>
+			<div class="inner-box53">
+				<div class="dot dot54"></div>
+				<div class="dot dot55"></div>
+			</div>
+		</div>
+	</div>
+	<div class="out-box">
+		<div class="box box6">
+			<div class="inner-box6">
+				<div class="dot dot61"></div>
+				<div class="dot dot62"></div>
+				<div class="dot dot63"></div>
+			</div>
+			<div class="inner-box6">
+				<div class="dot dot64"></div>
+				<div class="dot dot65"></div>
+				<div class="dot dot66"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
